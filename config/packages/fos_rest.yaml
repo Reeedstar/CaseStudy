@@ -1,0 +1,16 @@
+fos_rest:
+    serializer:
+        groups: [ "" ]
+    param_fetcher_listener: force
+    body_listener: true
+    format_listener:
+        enabled: true
+        rules:
+            - { path: '^/', priorities: [ 'json' ], fallback_format: 'json' }
+
+    view:
+        formats:
+            xml: false
+            json: true
+            yml: false
+        view_response_listener: force
