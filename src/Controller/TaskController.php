@@ -77,6 +77,8 @@ class TaskController extends AbstractController
             throw $this->createNotFoundException('Task not found.');
         }
 
+        // Query whether the task is already completed
+
         if (!in_array($status, ['completed', 'failed'])) {
             throw new \InvalidArgumentException('Invalid status.');
         }
@@ -87,6 +89,7 @@ class TaskController extends AbstractController
             $task->setStatus(TaskStatus::FAILED->name);
         }
 
+        // Check whether a task has an alert and set the alert to resolved true
         $this->checkForAlert($task, $em);
 
         $em->persist($task);

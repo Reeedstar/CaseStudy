@@ -11,14 +11,14 @@ use JMS\Serializer\Annotation as Serializer;
 class Alert
 {
     /**
-     * @var int|null
+     * @var string|null
      */
     #[ORM\Id]
     #[ORM\Column(type: 'string', length: 36, unique: true)]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
     #[Serializer\Groups(["alert"])]
-    private ?int $id;
+    private ?string $id;
 
     #[ORM\ManyToOne(inversedBy: 'alerts')]
     #[ORM\JoinColumn(nullable: false)]
@@ -53,7 +53,7 @@ class Alert
         $this->alertType = $alertType;
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

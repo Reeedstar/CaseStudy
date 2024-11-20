@@ -20,11 +20,13 @@ class TaskRepository extends ServiceEntityRepository
 
     public function findTaskForWorker(): ?Task
     {
+        // added max results
         $task = $this->createQueryBuilder('t')           
         ->where('t.status = :status')  
         ->setParameter('status', 'NEW') 
         ->orderBy('t.createdAt', 'DESC')
         ->getQuery()
+        ->setMaxResults(1)
         ->getOneOrNullResult();
 
         if (!$task) {

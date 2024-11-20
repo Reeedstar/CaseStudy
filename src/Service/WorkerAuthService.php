@@ -15,6 +15,7 @@ class WorkerAuthService
         $this->entityManager = $entityManager;
     }
 
+    // Function for authenticating the worker
     public function authenticate(Request $request): Worker
     {
        
@@ -32,6 +33,8 @@ class WorkerAuthService
             throw new UnauthorizedHttpException('Bearer', 'Worker not found');
         }
 
+        // Here we can also include a query that asks whether the worker is active. 
+        // if($worker->getActive())
         
         if ($worker->getAccessToken() !== $workerToken) {
             throw new UnauthorizedHttpException('Bearer', 'Invalid Worker Token');
